@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Bloque certains messages sur Botrix
 // @author       NarKotiix
-// @match        https://*.botrix.live/*
+// @match        https://kick.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/NarKotiix/botrix-message-block/main/botrix-message-block.user.js
 // @downloadURL  https://raw.githubusercontent.com/NarKotiix/botrix-message-block/main/botrix-message-block.user.js
