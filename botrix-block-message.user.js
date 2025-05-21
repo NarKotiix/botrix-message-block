@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Botrix Message Block
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Bloque certains messages sur Botrix
 // @author       NarKotiix
 // @match        https://kick.com/*
