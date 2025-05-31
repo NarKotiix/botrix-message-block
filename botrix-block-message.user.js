@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Botrix Message Block
+// @name         Botrix & Dyrobot Message Block
 // @namespace    http://tampermonkey.net/
-// @version      1.1
-// @description  Bloque certains messages sur Botrix
+// @version      1.2
+// @description  Bloque certains messages sur Botrix et Dyrobot
 // @author       NarKotiix
 // @match        https://kick.com/*
 // @grant        none
@@ -14,7 +14,6 @@
     'use strict';
 
     const observer = new MutationObserver(() => {
-        // Sélection du conteneur du chat (adapter le sélecteur si besoin)
         const chatContainer = document.querySelector('div[data-chat-scroll-area]');
         let scrollTopAvant = null;
         if (chatContainer) {
@@ -23,18 +22,18 @@
 
         document.querySelectorAll('div.group.relative.px-2.lg\\:px-3').forEach(el => {
             const contenu = el.innerText;
-            const estBotRix = contenu.includes('BotRix');
+
+            // Vérifie si le message vient de BotRix ou Dyrobot
+            const estBot = /BotRix|Dyrobot/i.test(contenu);
 
             const estMessagePertePoints = /Résultat\s*:\s*\d+\s*\|.*@.*!.*perdu\s*\d+\s*points/i.test(contenu);
-            //const estMessageCooldown = /@.+Vous pouvez utiliser cette commande à nouveau dans\s*\d+s/i.test(contenu);
             const estMessageEmojisPerdus = /Le résultat est:\s*.*\|\s*@.*Désolé.*perdu\s*\d+\s*points/i.test(contenu);
 
-            if (estBotRix && (estMessagePertePoints || estMessageEmojisPerdus)) {
+            if (estBot && (estMessagePertePoints || estMessageEmojisPerdus)) {
                 el.remove(); // Supprimer le message de l'affichage
             }
         });
 
-        // Restaure la position de scroll si elle a changé
         if (chatContainer && scrollTopAvant !== null) {
             chatContainer.scrollTop = scrollTopAvant;
         }
